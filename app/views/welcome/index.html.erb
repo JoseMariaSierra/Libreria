@@ -1,0 +1,67 @@
+<div class="row">
+	<div class="col-xs-5 well">
+		<center>
+			<h1>
+				Autores
+			</h1>
+			<div class="blanco" >
+				<% @autores.each do |autor| %>
+					<h3>
+						<%= autor.name %>
+						<%= autor.surname %>
+					</h3>
+					<b>ID:</b><%= autor.id %>
+					<br>
+					<b>Pais</b>: <%= autor.country %>
+					
+					<br>
+					<a data-confirm="Estás seguro de que quieres eliminar el autor?" class="btn btn-danger btn-xs" rel="nofollow" data-method="delete" href=<%="/authors/#{autor.id}"%>>
+                        <span class="glyphicon glyphicon-trash"></span>
+                            Eliminar
+                      </a>			
+		<hr>
+				<% end %>
+			</div>
+
+		</center>
+	</div>
+
+	<div class="col-xs-2">
+
+	</div>
+
+	<div class="col-xs-5 well">
+		<center>
+			<h1>
+				Libros
+			</h1>
+			<div class="blanco" >
+				<% @libros.each do |libro| %>
+					<h3>
+						<%= libro.title %>
+					</h3>
+					<% if Author.exists?(libro.author_id) %>
+						<b>Autor:</b> 
+						<%= Author.find(libro.author_id).name %>
+						<%= Author.find(libro.author_id).surname %>
+					<% else %>
+						<b>Autor:</b> Anonimo
+					<% end %>
+
+						<br><b>Año:</b> <%= libro.year %>
+						<br><b>ISBN:</b> <%= libro.isbn %>
+					<br>
+					<a data-confirm="Estás seguro de que quieres eliminar el libro?" class="btn btn-danger btn-xs" rel="nofollow" data-method="delete" href=<%="/books/#{libro.id}"%>>
+                        <span class="glyphicon glyphicon-trash"></span>
+                            Eliminar
+                      </a>	
+                      <hr>
+				<% end %>
+			</div>
+		</center>
+	</div>
+
+</div>
+
+
+	
